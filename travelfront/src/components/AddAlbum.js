@@ -10,7 +10,7 @@ function AddAlbum(props) {
       city: "",
     });
   
-    const [albums, setAlbums] = useState([]);
+    
   
     const handleSubmit = (e) => {
       e.preventDefault();
