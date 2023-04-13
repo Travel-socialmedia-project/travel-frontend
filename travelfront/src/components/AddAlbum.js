@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 
-function AddAlbum() {
+function AddAlbum(props) {
     const [form, setForm] = useState({
       title: "",
       image: "",
@@ -24,7 +24,7 @@ function AddAlbum() {
             country: "",
             city: "",
           });
-          setAlbums([response.data.album, ...albums]);
+        props.refreshAlbums()
         //
         //   dont know why its not displaying the newly created album on top
         // 

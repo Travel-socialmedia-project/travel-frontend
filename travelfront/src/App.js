@@ -7,6 +7,7 @@ import LoginPage from './Pages/LoginPage';
 import AlbumList from './Pages/AlbumsList';
 import AlbumDetailsPage from './Pages/AlbumDetailsPage';
 import UserPage from './Pages/UserProfile';
+import UpdateAlbum from './Pages/UpdateAlbum';
 // 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -26,6 +27,7 @@ function App() {
   <Route path="/signup" element={<SignPage/>}/>
   <Route path="/login" element={<LoginPage/>}/> 
   <Route path="/user/:userId" element={<UserPage/>}/> 
+  <Route path="/updatealbum/:albumId" element={<UpdateAlbum/>}/>
 
 </Routes>
 <Footer />
