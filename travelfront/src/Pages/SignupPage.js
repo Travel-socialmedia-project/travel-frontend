@@ -24,7 +24,7 @@ function SignUpPage() {
     axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, requestBody)
      .then((response)=>{
       navigate("/login")
-     }).catch((error) => console.log("error getting this Album", error))
+     }).catch((error) => console.log("error getting this Album signup", error))
       // const errorDescription = error.response.data.message;
       // setErrorMessage(errorDescription);
      
