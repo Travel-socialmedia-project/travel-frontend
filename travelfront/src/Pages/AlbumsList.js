@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 
 function AlbumList(){
     
-
+  const storedToken = localStorage.getItem('authToken');
   const [albums, setAlbums] = useState([]);
   
 
   const getAllAlbums = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/api/albums`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/albums`,{ headers: { Authorization: `Bearer ${storedToken}`} })
     .then((response) => setAlbums(response.data))
+    
     .catch((e) => console.log("Error Getting Albums List",e));
   }
 
@@ -34,6 +35,8 @@ function AlbumList(){
             <p>{album.title}</p>
             <p>{album.image}</p>
             <p>{album.country}</p>
+            <p>{album.user.name}</p>
+            
             <Link to={`/albums/${album._id}`} ><button>Details</button></Link>
           </div>
         ))}

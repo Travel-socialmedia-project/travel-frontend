@@ -6,12 +6,12 @@ import SignUpPage from './Pages/SignupPage';
 import LoginPage from './Pages/LoginPage';
 import AlbumList from './Pages/AlbumsList';
 import AlbumDetailsPage from './Pages/AlbumDetailsPage';
-import UserPage from './Pages/UserProfile';
+import UserProfile from './Pages/UserProfile';
 import UpdateAlbum from './Pages/UpdateAlbum';
 // 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-// import AddAlbum from './components/AddAlbum';
+
 
 
 
@@ -26,8 +26,9 @@ function App() {
   <Route path="/albums" element={<AlbumList/>}/>
   <Route path="/signup" element={<SignUpPage/>}/>
   <Route path="/login" element={<LoginPage/>}/> 
-  <Route path="/user/:userId" element={<UserPage/>}/> 
+  <Route path="/user/:userId" element={<UserProfile/>}/> 
   <Route path="/updatealbum/:albumId" element={<UpdateAlbum/>}/>
+
 
 </Routes>
 <Footer />

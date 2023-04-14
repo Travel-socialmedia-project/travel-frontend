@@ -37,10 +37,18 @@ function AlbumDetails() {
       {album && (
         <>
           <h1>Title of the album: {album.title}</h1>
-          <img src="${album.image}" alt={album.title} />
+          <img src={album.image} alt={album.title} />
           <p>Country: {album.country}</p>
           <p>City: {album.city}</p>
           <p>Description: {album.description}</p>
+
+{/* check the bellow line of code, 
+route is not defined and we need to see the user name by its id and we are getting the userId */}
+
+
+          <Link to= {`/user/${album.user}`}> <p>Created By: {album.user}</p>
+          </Link>
+          
         </>
       )}
       <button onClick={deleteProject}> Delete Album </button>

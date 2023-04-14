@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useState,  } from "react";
 import axios from 'axios';
 
 function AddAlbum(props) {
+
+  const storedToken = localStorage.getItem('authToken');
+
+  // const {userId} = useParams();
     const [form, setForm] = useState({
       title: "",
       image: "",
       description: "",
       country: "",
       city: "",
+      // user: props.user._id
     });
   
     
@@ -15,7 +20,7 @@ function AddAlbum(props) {
     const handleSubmit = (e) => {
       e.preventDefault();
       axios
-        .post(`${process.env.REACT_APP_API_URL}/api/albums`, { ...form })
+        .post(`${process.env.REACT_APP_API_URL}/api/albums`, { ...form },{ headers: { Authorization: `Bearer ${storedToken}`} })
         .then((response) => {
           setForm({
             title: "",
@@ -23,11 +28,11 @@ function AddAlbum(props) {
             description: "",
             country: "",
             city: "",
+            // user: props.user._id
+            
           });
+          
         props.refreshAlbums()
-        //
-        //   dont know why its not displaying the newly created album on top
-        // 
         })
         .catch((error) => console.log("error creating new album", error));
     };
@@ -83,15 +88,7 @@ function AddAlbum(props) {
           />
         </label>
         <label>
-          {/* Users:
-          <input
-            type="text"
-            name="userAccess"
-            value={form.userAccess}
-            onChange={(e) => {
-              setForm({...form, userAcess: e.target.value});
-            }}
-          /> */}
+        
         </label>
         <label>
           Description:
@@ -104,7 +101,18 @@ function AddAlbum(props) {
             }}
           />
         </label>
-
+        {/* <label>
+          Created By:
+          <input
+            type="hidden"
+            name="user"
+            value={form.user}
+            onChange={(e) => {
+              setForm({...form, user: e.target.value});
+            }}
+          />
+        </label> */}
+        {/* <p>Posted by: {props.user.name}</p> */}
         <button to='/albums'>Create</button>
       </form>
     </section>
@@ -112,3 +120,12 @@ function AddAlbum(props) {
 }
 
 export default AddAlbum;
+  // {/* Users:
+  //         <input
+  //           type="text"
+  //           name="userAccess"
+  //           value={form.userAccess}
+  //           onChange={(e) => {
+  //             setForm({...form, userAcess: e.target.value});
+  //           }}
+  //         /> */}
