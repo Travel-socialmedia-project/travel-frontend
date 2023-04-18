@@ -1,40 +1,56 @@
 import { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useParams } from "react-router-dom";
+import { service } from "../service/service";
 
 function AddAlbum(props) {
   const { storedToken } = useParams();
+  const [image, setImage] = useState("");
+
+  const handleFileUpload = (e) => {
+    const uploadData = new FormData();
+
+    uploadData.append("image", e.target.files[0]);
+
+    service
+      .uploadImage(uploadData)
+      .then((response) => {
+        setImage(response.fileUrl);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  };
 
   const [form, setForm] = useState({
     title: "",
-    image: "",
     description: "",
     country: "",
     city: "",
-    userAccess: ""
+    userAccess: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/api/albums`, { ...form, userAccess:[form.useraccess] },{ headers: { Authorization: `Bearer ${storedToken}`} })
+    service
+      .post(
+        `${process.env.REACT_APP_API_URL}/api/albums`,
+        { ...form, userAccess: [form.useraccess] },
+        { headers: { Authorization: `Bearer ${storedToken}` } }
+      )
       .then((response) => {
+        console.log(response);
         setForm({
           title: "",
-          image: "",
           description: "",
           country: "",
           city: "",
-          userAccess: ""
+          userAccess: "",
+        });
+        setImage({
+          image: "",
         });
         props.refreshAlbums();
       })
       .catch((error) => console.log("error creating new album FE", error));
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    setForm({...form, image: file});
   };
 
   return (
@@ -47,7 +63,7 @@ function AddAlbum(props) {
             name="title"
             value={form.title}
             onChange={(e) => {
-              setForm({...form, title: e.target.value});
+              setForm({ ...form, title: e.target.value });
             }}
           />
         </label>
@@ -59,7 +75,7 @@ function AddAlbum(props) {
             name="country"
             value={form.country}
             onChange={(e) => {
-              setForm({...form, country: e.target.value});
+              setForm({ ...form, country: e.target.value });
             }}
           />
         </label>
@@ -68,7 +84,7 @@ function AddAlbum(props) {
           Image:
           <input
             type="file"
-            name="image"
+            // name="image"
             onChange={(e) => handleFileUpload(e)}
           />
         </label>
@@ -80,7 +96,7 @@ function AddAlbum(props) {
             name="city"
             value={form.city}
             onChange={(e) => {
-              setForm({...form, city: e.target.value});
+              setForm({ ...form, city: e.target.value });
             }}
           />
         </label>
@@ -92,7 +108,7 @@ function AddAlbum(props) {
             name="description"
             value={form.description}
             onChange={(e) => {
-              setForm({...form, description: e.target.value});
+              setForm({ ...form, description: e.target.value });
             }}
           />
         </label>
@@ -104,12 +120,12 @@ function AddAlbum(props) {
             name="useraccess"
             value={form.useraccess}
             onChange={(e) => {
-              setForm({...form, useraccess: e.target.value});
+              setForm({ ...form, useraccess: e.target.value });
             }}
           />
         </label>
 
-        <button type='submit'>Create</button>
+        <button type="submit">Create</button>
       </form>
     </section>
   );
