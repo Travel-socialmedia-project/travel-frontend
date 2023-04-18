@@ -8,6 +8,7 @@ function AlbumList(){
   const storedToken = localStorage.getItem('authToken');
   const [albums, setAlbums] = useState([]);
   
+  
 
   const getAllAlbums = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/albums`,{ headers: { Authorization: `Bearer ${storedToken}`} })
@@ -18,11 +19,9 @@ function AlbumList(){
 
   useEffect(() => {
     getAllAlbums();
-  }, []);
+  }, []);///add []
 
-  if (albums.length === 0) {
-    return <div>Loading albums...</div>;
-  }
+
 
   return (
     <div>
@@ -33,12 +32,13 @@ function AlbumList(){
         {albums.map((album) => (
           <div key={album._id} {...album}>
             <p>{album.title}</p>
-            <p>{album.image}</p>
+            <img src={album.image} alt={album.title} />
             <p>{album.country}</p>
             <p>{album.user.name}</p>
-            
+            {console.log(album.image)}
             <Link to={`/albums/${album._id}`} ><button>Details</button></Link>
           </div>
+          
         ))}
       </div>
     </div>

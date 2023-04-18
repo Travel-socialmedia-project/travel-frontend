@@ -12,10 +12,10 @@ function UpdateAlbum() {
     });
     const { albumId } = useParams();
     const navigate = useNavigate();
-
+    const storedToken = localStorage.getItem('authToken');
   useEffect(() => {
    axios
-     .get(`${process.env.REACT_APP_API_URL}/api/albums/${albumId}`)
+     .get(`${process.env.REACT_APP_API_URL}/api/albums/${albumId}`,{ headers: { Authorization: `Bearer ${storedToken}`} })
      .then((response) => {
        const oneAlbum = response.data;
        setForm({
@@ -27,7 +27,7 @@ function UpdateAlbum() {
        });
      })
      .catch((error) => console.log("error getting this Album", error));
- }, [albumId]);
+ }, [albumId]);///add [albumId]
 
  // Update the form state when the user types in an input field
  const handleFormChange = (e) => {
@@ -51,7 +51,7 @@ function UpdateAlbum() {
    };
 
    axios
-     .put(`${process.env.REACT_APP_API_URL}/api/albums/${albumId}`, requestBody)
+     .put(`${process.env.REACT_APP_API_URL}/api/albums/${albumId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}`} })
      .then((response) => {
        navigate(`/albums/${albumId}`);
      })

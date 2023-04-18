@@ -1,45 +1,45 @@
-import { useState,  } from "react";
+import { useState } from "react";
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 function AddAlbum(props) {
+  const { storedToken } = useParams();
 
-  const storedToken = localStorage.getItem('authToken');
+  const [form, setForm] = useState({
+    title: "",
+    image: "",
+    description: "",
+    country: "",
+    city: "",
+    userAccess: ""
+  });
 
-  // const {userId} = useParams();
-    const [form, setForm] = useState({
-      title: "",
-      image: "",
-      description: "",
-      country: "",
-      city: "",
-      // user: props.user._id
-    });
-  
-    
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      axios
-        .post(`${process.env.REACT_APP_API_URL}/api/albums`, { ...form },{ headers: { Authorization: `Bearer ${storedToken}`} })
-        .then((response) => {
-          setForm({
-            title: "",
-            image: "",
-            description: "",
-            country: "",
-            city: "",
-            // user: props.user._id
-            
-          });
-          
-        props.refreshAlbums()
-        })
-        .catch((error) => console.log("error creating new album", error));
-    };
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/albums`, { ...form, userAccess:[form.useraccess] },{ headers: { Authorization: `Bearer ${storedToken}`} })
+      .then((response) => {
+        setForm({
+          title: "",
+          image: "",
+          description: "",
+          country: "",
+          city: "",
+          userAccess: ""
+        });
+        props.refreshAlbums();
+      })
+      .catch((error) => console.log("error creating new album FE", error));
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    setForm({...form, image: file});
+  };
+
   return (
     <section className="AddAlbum">
-      <form onSubmit={handleSubmit}> 
+      <form onSubmit={handleSubmit}>
         <label>
           Title:
           <input
@@ -67,12 +67,9 @@ function AddAlbum(props) {
         <label>
           Image:
           <input
-            type="text"
+            type="file"
             name="image"
-            value={form.image}
-            onChange={(e) => {
-              setForm({...form, image: e.target.value});
-            }}
+            onChange={(e) => handleFileUpload(e)}
           />
         </label>
 
@@ -87,9 +84,7 @@ function AddAlbum(props) {
             }}
           />
         </label>
-        <label>
-        
-        </label>
+
         <label>
           Description:
           <input
@@ -101,31 +96,23 @@ function AddAlbum(props) {
             }}
           />
         </label>
-        {/* <label>
-          Created By:
+
+        <label>
+          Add User Access:
           <input
-            type="hidden"
-            name="user"
-            value={form.user}
+            type="text"
+            name="useraccess"
+            value={form.useraccess}
             onChange={(e) => {
-              setForm({...form, user: e.target.value});
+              setForm({...form, useraccess: e.target.value});
             }}
           />
-        </label> */}
-        {/* <p>Posted by: {props.user.name}</p> */}
-        <button to='/albums'>Create</button>
+        </label>
+
+        <button type='submit'>Create</button>
       </form>
     </section>
   );
 }
 
 export default AddAlbum;
-  // {/* Users:
-  //         <input
-  //           type="text"
-  //           name="userAccess"
-  //           value={form.userAccess}
-  //           onChange={(e) => {
-  //             setForm({...form, userAcess: e.target.value});
-  //           }}
-  //         /> */}

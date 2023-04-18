@@ -26,7 +26,7 @@ function App() {
   <Route path="/albums" element={<AlbumList/>}/>
   <Route path="/signup" element={<SignUpPage/>}/>
   <Route path="/login" element={<LoginPage/>}/> 
-  <Route path="/user/:userId" element={<UserProfile/>}/> 
+  <Route path="/user/:userId/albums" element={<UserProfile/>}/> 
   <Route path="/updatealbum/:albumId" element={<UpdateAlbum/>}/>
 
 
