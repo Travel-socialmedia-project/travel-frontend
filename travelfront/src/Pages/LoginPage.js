@@ -1,19 +1,21 @@
 import { useState, useContext } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Auth } from "../components/auth";
+import api from "../service/service";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const {userId} = useParams()
 
   const navigate = useNavigate();
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
-  const { storeToken, authenticateUser } = useContext(Auth);
+  const { storeToken, authenticateUser, setToken } = useContext(Auth);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -23,8 +25,9 @@ function LoginPage() {
       .post(`${process.env.REACT_APP_API_URL}/auth/login`, requestBody)
       .then((response) => {
         storeToken(response.data.authToken);
+        setToken(response.data.authToken)
         authenticateUser();
-        navigate("/");
+        navigate(`/user/${userId}`);
       })
       .catch((error) => {
         const errorDescription = error.response.data;
