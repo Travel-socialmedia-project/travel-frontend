@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 
 
 
@@ -30,47 +31,84 @@ function SignUpPage() {
      
   }
     
-    return (
-      <div>
-        <h1>Signup page</h1>
-      
-      
-<form onSubmit={handleSignupSubmit}> 
-        <label>
-          Email:
-          <input
+  return (
+    <div>
+      <h1>Signup page</h1>
+
+      <Form onSubmit={handleSignupSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
             type="email"
             name="email"
             value={email}
             onChange={handleEmail}
+            placeholder="Enter email"
           />
-        </label>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
 
-        <label>
-          Name:
-          <input
+        <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
             type="text"
             name="name"
             value={name}
             onChange={handleName}
+            placeholder="Enter name"
           />
-        </label>
+        </Form.Group>
 
-        <label>
-          Password:
-          <input
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
             name="password"
             value={password}
             onChange={handlePassword}
+            placeholder="Password"
           />
-        </label>
-          <button type="submit">SignUp</button>
-        </form>
-          You already have an account? <Link to="/login">Login</Link>
-        </div>
-    );
-  }
-  
-  export default SignUpPage;
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Sign Up
+        </Button>
+      </Form>
+
+      <div>
+        Already have an account? <Link to="/login">Login</Link>
+      </div>
+    </div>
+  );
+}
+
+export default SignUpPage;
+
+  /*
+  return (
+    <Form>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+  );
+  */
+
   

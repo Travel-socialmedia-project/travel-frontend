@@ -9,15 +9,16 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function Footer() {
   return (
-    <footer className="bg-dark text-center text-white">+
+    <div style={{ position: "relative", bottom: 0, width: "100%" }}>
+      <footer className="bg-dark text-center text-white" >
       {/* Grid container */}
-      <div className="container p-4 pb-0">
+      <div className="container p-4 pb-0 " >
         {/* Section: Social media */}
         <section className="mb-4">
           {/* Facebook */}
           <a
             className="btn btn-outline-light btn-floating m-1"
-            href="#!"
+            href="https://facebook.com/"
             role="button"
           >
             <i className="fab fa-facebook-f"></i>
@@ -26,7 +27,7 @@ function Footer() {
           {/* Twitter */}
           <a
             className="btn btn-outline-light btn-floating m-1"
-            href="#!"
+            href="https://twitter.com/"
             role="button"
           >
             <i className="fab fa-twitter"></i>
@@ -35,7 +36,7 @@ function Footer() {
           {/* Google */}
           <a
             className="btn btn-outline-light btn-floating m-1"
-            href="#!"
+            href="https://www.google.com/"
             role="button"
           >
             <i className="fab fa-google"></i>
@@ -44,7 +45,7 @@ function Footer() {
           {/* Instagram */}
           <a
             className="btn btn-outline-light btn-floating m-1"
-            href="#!"
+            href="https://www.instagram.com/"
             role="button"
           >
             <i className="fab fa-instagram"></i>
@@ -53,7 +54,7 @@ function Footer() {
           {/* Linkedin */}
           <a
             className="btn btn-outline-light btn-floating m-1"
-            href="#!"
+            href="https://pt.linkedin.com/"
             role="button"
           >
             <i className="fab fa-linkedin-in"></i>
@@ -62,10 +63,24 @@ function Footer() {
           {/* Github */}
           <a
             className="btn btn-outline-light btn-floating m-1"
-            href="#!"
+            href="https://github.com/DavidRamires911"
             role="button"
-          >
+          > 
             <i className="fab fa-github"></i>
+            <p>
+David Correia
+          </p>
+          </a>
+
+          <a
+            className="btn btn-outline-light btn-floating m-1"
+            href="https://github.com/andrehcarvalho6"
+            role="button"
+          > 
+            <i className="fab fa-github"></i>
+            <p>
+ André Carvalho
+          </p>
           </a>
         </section>
         {/* Section: Social media */}
@@ -77,13 +92,10 @@ function Footer() {
         className="text-center p-3"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
-        © {new Date().getFullYear()} Copyright:
-        <a className="text-white" href="https://mdbootstrap.com/">
-          MDBootstrap.com
-        </a>
       </div>
       {/* Copyright */}
     </footer>
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import {Button} from 'react-bootstrap';
 
 function UpdateAlbum() {
     const [form, setForm] = useState({
@@ -56,7 +57,7 @@ function UpdateAlbum() {
        navigate(`/albums/${albumId}`);
      })
      .catch((error) => console.log("error updating this Album", error));
- };
+ }
 
 
   return (
@@ -113,7 +114,9 @@ function UpdateAlbum() {
           />
         </label>
         <br />
-<button  type="submit"> Update my Album </button>
+        <Button variant="primary" type="submit">
+        Update my Album
+      </Button>
       </form>
     </div>
 

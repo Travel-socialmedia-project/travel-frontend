@@ -1,12 +1,17 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 function AlbumDetails(props) {
-  const { albumId } = useParams();
+  const { albumId, userId } = useParams(['albumId', 'userId']);
   const navigate = useNavigate();
   const [album, setAlbum] = useState(null);
   const storedToken = localStorage.getItem('authToken');
+  
+
+
+
 
   const getAlbum = () => {
     axios
@@ -22,6 +27,9 @@ function AlbumDetails(props) {
     getAlbum();
   },[] );
 
+
+  
+
   const deleteProject = () => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/api/albums/${albumId}`,{ headers: { Authorization: `Bearer ${storedToken}`} })
@@ -32,8 +40,12 @@ function AlbumDetails(props) {
       
   };
 
+
+ 
+
   return (
-    <div>
+    <div style={{ marginBottom: "50px" }}>
+      <hr />
       <h1>Album Details page</h1>
 
       {album && (
@@ -44,20 +56,18 @@ function AlbumDetails(props) {
           <p>City: {album.city}</p>
           <p>Description: {album.description}</p>
 
-{/* check the bellow line of code, 
-route is not defined and we need 
-to see the user name by its id
- and we are getting the userId */}
 
- <Link to={`/user/${album.user._id}/albums`}>
-  <p>Created By: {album.user.name}</p>
+<p>Created By: </p>
+ <Link to={`/my-albums/${userId}`}> 
+ {/* in the previous line of code we get undifined instead of the real user id */}
+  <p>{album.user.name}</p>
 </Link>
           
         </>
       )}
-      <button onClick={deleteProject}> Delete Album </button>
+      <Button onClick={deleteProject} variant="primary"> Delete Album </Button>
       <Link to={`/updatealbum/${albumId}`}>
-        <button>Update Album</button>
+        <Button variant="primary">Update Album</Button>
       </Link>
     </div>
   );
