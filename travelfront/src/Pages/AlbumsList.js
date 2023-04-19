@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import AddAlbum from "../components/AddAlbum";
 import { Link } from "react-router-dom";
+// 
+import { Card, Button } from 'react-bootstrap';
+import Placeholder from 'react-bootstrap/Placeholder';
 
 function AlbumList(){
     
@@ -23,37 +26,70 @@ function AlbumList(){
 
 
 
+//   return (
+//     <div>
+
+//       <h1>Album list</h1>
+//       <AddAlbum refreshAlbums={getAllAlbums} />
+//       <div>
+//         {albums.map((album) => (
+//           <div key={album._id} {...album}>
+//             <img src={album.image} alt={album.title} />
+//             <p>{album.title}</p>
+//             <p>{album.country}</p>
+//             <p>{album.user.name}</p>
+//             {console.log(album.image)}
+//             <Link to={`/albums/${album._id}`} ><button>Details</button></Link>
+//           </div>
+          
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+ 
+// export default AlbumList;
+
+
+
+
   return (
     <div>
-
       <h1>Album list</h1>
       <AddAlbum refreshAlbums={getAllAlbums} />
-      <div>
+      <div className="d-flex justify-content-around flex-wrap">
         {albums.map((album) => (
-          <div key={album._id} {...album}>
-            <p>{album.title}</p>
-            <img src={album.image} alt={album.title} />
-            <p>{album.country}</p>
-            <p>{album.user.name}</p>
-            {console.log(album.image)}
-            <Link to={`/albums/${album._id}`} ><button>Details</button></Link>
-          </div>
-          
+          <Card key={album._id} style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={album.image} alt={album.title} />
+            <Card.Body>
+              <Card.Title>{album.title}</Card.Title>
+              <Card.Text>
+                {album.country} - {album.user.name}
+              </Card.Text>
+              <Button variant="primary" as={Link} to={`/albums/${album._id}`}>
+                Details
+              </Button>
+            </Card.Body>
+          </Card>
         ))}
+        {!albums.length && (
+          <Card style={{ width: '18rem' }}>
+            <Placeholder as={Card.Title} animation="glow">
+              <Placeholder xs={6} />
+            </Placeholder>
+            <Placeholder as={Card.Text} animation="glow">
+              <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+              <Placeholder xs={6} /> <Placeholder xs={8} />
+            </Placeholder>
+            <Placeholder.Button variant="primary" xs={6} />
+          </Card>
+        )}
       </div>
     </div>
   );
 }
- 
-export default AlbumList;
-// {/* <div className="AlbumCard card"> */}
-    
-// {/* <Link to={`/albums/${_id}`}>
-//   <h3>{title}</h3>
-// </Link>
-// <p style={{ maxWidth: "400px" }}>{description} </p>
-// </div> */}
 
+export default AlbumList;
 
 
 

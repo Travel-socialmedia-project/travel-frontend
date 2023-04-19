@@ -5,11 +5,11 @@ import { useNavigate, useParams } from "react-router-dom";
 function UpdateAlbum() {
     const [form, setForm] = useState({
       title: "",
-      image: "",
       description: "",
       country: "",
       city: "",
     });
+    const [image, setImage] = useState("");
     const { albumId } = useParams();
     const navigate = useNavigate();
     const storedToken = localStorage.getItem('authToken');
@@ -75,13 +75,12 @@ function UpdateAlbum() {
         </label>
         <br />
         <label>
-          Image:
-          <input
-            type="text"
-            name="image"
-            value={form.image}
-            onChange={handleFormChange}
-          />
+        Image:
+            <input
+              type="file"
+              name="image"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
         </label>
         <br />
         <label>

@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Auth } from "../components/auth";
-import api from "../service/service";
+
 
 function LoginPage() {
   const [email, setEmail] = useState("");
