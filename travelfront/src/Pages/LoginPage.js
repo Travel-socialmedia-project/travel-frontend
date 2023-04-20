@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Auth } from "../components/auth";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';

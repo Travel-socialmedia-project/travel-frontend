@@ -1,0 +1,16 @@
+header {
+    height: 50px;
+    background-color: #ccc;
+    padding: 10px;
+  }
+  
+  footer {
+    height: 50px;
+    background-color: #ccc;
+    padding: 10px;
+  }
+  
+  main {
+    margin-top: 70px;
+    margin-bottom: 70px;
+  }

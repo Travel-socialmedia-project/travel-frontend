@@ -61,67 +61,168 @@ function UpdateAlbum() {
 
 
   return (
-    <>
-    <div>
-      <h2>Update Album</h2>
-      <form onSubmit={handleFormSubmit}>
-        <label>
-          Title:
-          <input
-            type="text"
-            name="title"
-            value={form.title}
-            onChange={handleFormChange}
-          />
-        </label>
-        <br />
-        <label>
-        Image:
-            <input
-              type="file"
-              name="image"
-              onChange={(e) => setImage(e.target.files[0])}
-            />
-        </label>
-        <br />
-        <label>
-          Description:
-          <input
-            type="text"
-            name="description"
-            value={form.description}
-            onChange={handleFormChange}
-          />
-        </label>
-        <br />
-        <label>
-          Country:
-          <input
-            type="text"
-            name="country"
-            value={form.country}
-            onChange={handleFormChange}
-          />
-        </label>
-        <br />
-        <label>
-          City:
-          <input
-            type="text"
-            name="city"
-            value={form.city}
-            onChange={handleFormChange}
-          />
-        </label>
-        <br />
-        <Button variant="primary" type="submit">
-        Update my Album
-      </Button>
-      </form>
+    //   <>
+    //     <div>
+    //       <h2>Update Album</h2>
+    //       <form onSubmit={handleFormSubmit}>
+    //         <div className="form-group">
+    //           <label htmlFor="title">Title:</label>
+    //           <input
+    //             type="text"
+    //             className="form-control"
+    //             id="title"
+    //             name="title"
+    //             value={form.title}
+    //             onChange={handleFormChange}
+    //           />
+    //         </div>
+    //         <div className="form-group">
+    //           <label htmlFor="image">Image:</label>
+    //           <input
+    //             type="file"
+    //             className="form-control-file"
+    //             id="image"
+    //             name="image"
+    //             onChange={(e) => setImage(e.target.files[0])}
+    //           />
+    //         </div>
+    //         <div className="form-group">
+    //           <label htmlFor="description">Description:</label>
+    //           <input
+    //             type="text"
+    //             className="form-control"
+    //             id="description"
+    //             name="description"
+    //             value={form.description}
+    //             onChange={handleFormChange}
+    //           />
+    //         </div>
+    //         <div className="form-group">
+    //           <label htmlFor="country">Country:</label>
+    //           <input
+    //             type="text"
+    //             className="form-control"
+    //             id="country"
+    //             name="country"
+    //             value={form.country}
+    //             onChange={handleFormChange}
+    //           />
+    //         </div>
+    //         <div className="form-group">
+    //           <label htmlFor="city">City:</label>
+    //           <input
+    //             type="text"
+    //             className="form-control"
+    //             id="city"
+    //             name="city"
+    //             value={form.city}
+    //             onChange={handleFormChange}
+    //           />
+    //         </div>
+    //         <Button variant="primary" type="submit">
+    //           Update my Album
+    //         </Button>
+    //       </form>
+    //     </div>
+    //   </>
+
+
+
+
+// 
+
+<div>
+ <h2>Update Album</h2>
+<form onSubmit={handleFormSubmit}>
+  <div class="form-row">
+  <div class="form-group">
+    <label for="image">Image:</label>
+    <input
+                type="file"
+                className="form-control-file"
+                id="image"
+                name="image"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+    <div class="form-group col-md-6">
+      <label for="title">Title:</label>
+      <input
+                type="text"
+                className="form-control"
+                id="title"
+                name="title"
+                value={form.title}
+                onChange={handleFormChange}
+              />
     </div>
+    
+  </div>
+  
+  </div>
+  <div class="form-group col-md-6">
+    <label for="description">Description</label>
+    <input
+                type="text"
+                className="form-control"
+                id="description"
+                name="description"
+                value={form.description}
+                onChange={handleFormChange}
+              />
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="city">City</label>
+      <input
+                type="text"
+                className="form-control"
+                id="city"
+                name="city"
+                value={form.city}
+                onChange={handleFormChange}
+              />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="country">Country:</label>
+      <input
+                type="text"
+                className="form-control"
+                id="country"
+                name="country"
+                value={form.country}
+                onChange={handleFormChange}
+              />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="agency">Agency</label>
+      <input
+                type="text"
+                className="form-control"
+                id="agency"
+                name="agency"
+                value={form.agency}
+                onChange={handleFormChange}
+              />
+    </div>
+    </div>
+    <div>
+    <Button variant="primary" type="submit">
+              Update my Album
+            </Button>
+    </div>
+            
+</form>
+</div>
 
 
-    </>
-  )
+     );
+
+
 }
 export default UpdateAlbum;
+
+
+
+/*
+
+*/

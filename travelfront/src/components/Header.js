@@ -2,19 +2,16 @@ import { Link } from "react-router-dom";
 import { Auth } from "../components/auth";
 import { useContext } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-  integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-  crossorigin="anonymous"
-/>
+// import '/src/App.css';
+
+
 function Header() {
   const { isLoggedIn, user, logOutUser } = useContext(Auth);
 
   return (
     <div>
       <hr />
-    <Navbar bg="light" expand="lg" fixed="top">
+    <Navbar bg="light" expand="lg" fixed="top" style={{ zIndex: 1 }} postion= "absolute" margin-bottom>
       <Container>
         <Navbar.Brand as={Link} to="/">
           Home
@@ -27,11 +24,15 @@ function Header() {
                 <Nav.Link as={Link} to="/albums">
                   Albums
                 </Nav.Link>
+                <Nav.Link as={Link} to="/agency">
+                    Agency
+                </Nav.Link>
                 <NavDropdown title={user && user.name} id="basic-nav-dropdown">
                   <NavDropdown.Item
                     as={Link}
                     to={`/my-albums`}
                   >
+                   
                     Profile
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={logOutUser}>

@@ -10,7 +10,16 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 function Footer() {
   return (
     <div style={{ position: "relative", bottom: 0, width: "100%" }}>
-      <footer className="bg-dark text-center text-white" >
+      <footer 
+      className="bg-dark text-center text-white" 
+      style={{
+        position: "fixed",
+        bottom: 0,
+        width: "100%",
+        height: "100px", 
+        marginTop: "50px"
+      }}
+    >
       {/* Grid container */}
       <div className="container p-4 pb-0 " >
         {/* Section: Social media */}
@@ -61,11 +70,13 @@ function Footer() {
           </a>
 
           {/* Github */}
+          <div>
           <a
             className="btn btn-outline-light btn-floating m-1"
             href="https://github.com/DavidRamires911"
             role="button"
           > 
+          
             <i className="fab fa-github"></i>
             <p>
 David Correia
@@ -82,6 +93,8 @@ David Correia
  André Carvalho
           </p>
           </a>
+          </div>
+          
         </section>
         {/* Section: Social media */}
       </div>

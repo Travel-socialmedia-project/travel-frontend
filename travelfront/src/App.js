@@ -1,6 +1,6 @@
 import './App.css';
 import {Routes, Route} from "react-router-dom";
-// 
+import AgencyList from './Pages/Agency';
 import MainPage from './Pages/MainPage';
 import SignUpPage from './Pages/SignupPage';
 import LoginPage from './Pages/LoginPage';
@@ -12,6 +12,8 @@ import MyAlbums from './Pages/MyAlbums';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import UserAlbums from './components/UserAlbums';
+import React from 'react';
+
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -33,10 +35,11 @@ function App() {
   <Route path="/updatealbum/:albumId" element={<UpdateAlbum/>}/>
   <Route path="/my-albums" element={<MyAlbums/>}/>
   <Route path="/my-albums/:userId" element={<UserAlbums/>}/>
-
+  <Route path="/agency" element={<AgencyList/>}/>
+ 
 
 </Routes>
-<Footer />
+<Footer id="footer"/>
 
     </div>
   );

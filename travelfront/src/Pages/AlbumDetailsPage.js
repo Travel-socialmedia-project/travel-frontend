@@ -11,7 +11,7 @@ function AlbumDetails(props) {
   
 
 
-
+console.log(storedToken);
 
   const getAlbum = () => {
     axios
@@ -40,7 +40,6 @@ function AlbumDetails(props) {
       
   };
 
-
  
 
   return (
@@ -62,7 +61,11 @@ function AlbumDetails(props) {
  {/* in the previous line of code we get undifined instead of the real user id */}
   <p>{album.user.name}</p>
 </Link>
-          
+<p>Travel Agency: </p>
+<Link to={`/agency`}> 
+ {/* in the previous line of code we need to pass an id */}
+  <p>{album.agencyused.name}</p>
+  </Link>
         </>
       )}
       <Button onClick={deleteProject} variant="primary"> Delete Album </Button>
