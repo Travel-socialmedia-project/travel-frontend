@@ -61,81 +61,14 @@ function UpdateAlbum() {
 
 
   return (
-    //   <>
-    //     <div>
-    //       <h2>Update Album</h2>
-    //       <form onSubmit={handleFormSubmit}>
-    //         <div className="form-group">
-    //           <label htmlFor="title">Title:</label>
-    //           <input
-    //             type="text"
-    //             className="form-control"
-    //             id="title"
-    //             name="title"
-    //             value={form.title}
-    //             onChange={handleFormChange}
-    //           />
-    //         </div>
-    //         <div className="form-group">
-    //           <label htmlFor="image">Image:</label>
-    //           <input
-    //             type="file"
-    //             className="form-control-file"
-    //             id="image"
-    //             name="image"
-    //             onChange={(e) => setImage(e.target.files[0])}
-    //           />
-    //         </div>
-    //         <div className="form-group">
-    //           <label htmlFor="description">Description:</label>
-    //           <input
-    //             type="text"
-    //             className="form-control"
-    //             id="description"
-    //             name="description"
-    //             value={form.description}
-    //             onChange={handleFormChange}
-    //           />
-    //         </div>
-    //         <div className="form-group">
-    //           <label htmlFor="country">Country:</label>
-    //           <input
-    //             type="text"
-    //             className="form-control"
-    //             id="country"
-    //             name="country"
-    //             value={form.country}
-    //             onChange={handleFormChange}
-    //           />
-    //         </div>
-    //         <div className="form-group">
-    //           <label htmlFor="city">City:</label>
-    //           <input
-    //             type="text"
-    //             className="form-control"
-    //             id="city"
-    //             name="city"
-    //             value={form.city}
-    //             onChange={handleFormChange}
-    //           />
-    //         </div>
-    //         <Button variant="primary" type="submit">
-    //           Update my Album
-    //         </Button>
-    //       </form>
-    //     </div>
-    //   </>
+    
 
-
-
-
-// 
-
-<div>
- <h2>Update Album</h2>
-<form onSubmit={handleFormSubmit}>
-  <div class="form-row">
-  <div class="form-group">
+<div style={{paddingTop: "80px" , display: 'flex', justifyContent: 'center' }}>
+  <div>
+    <h2>Update Album</h2>
+    <form onSubmit={handleFormSubmit}>
+    <div className="form-row mb-3">
+  <div className="form-group col-md-12">
     <label for="image">Image:</label>
     <input
                 type="file"
@@ -144,7 +77,7 @@ function UpdateAlbum() {
                 name="image"
                 onChange={(e) => setImage(e.target.files[0])}
               />
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12 mb-3">
       <label for="title">Title:</label>
       <input
                 type="text"
@@ -159,7 +92,7 @@ function UpdateAlbum() {
   </div>
   
   </div>
-  <div class="form-group col-md-6">
+  <div class="form-group col-md-12 mb-3">
     <label for="description">Description</label>
     <input
                 type="text"
@@ -171,7 +104,7 @@ function UpdateAlbum() {
               />
   </div>
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12 mb-3">
       <label for="city">City</label>
       <input
                 type="text"
@@ -182,7 +115,7 @@ function UpdateAlbum() {
                 onChange={handleFormChange}
               />
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12 mb-3">
       <label for="country">Country:</label>
       <input
                 type="text"
@@ -193,7 +126,7 @@ function UpdateAlbum() {
                 onChange={handleFormChange}
               />
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12 mb-3">
       <label for="agency">Agency</label>
       <input
                 type="text"
@@ -212,6 +145,7 @@ function UpdateAlbum() {
     </div>
             
 </form>
+</div>
 </div>
 
 

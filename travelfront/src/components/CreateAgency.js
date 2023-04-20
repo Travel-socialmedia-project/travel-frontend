@@ -1,58 +1,64 @@
-// form 
-// axios post /âgency
 
 import { useState } from "react";
-import axios from "axios";
+
 import { Button, Form } from "react-bootstrap";
+import api from "../service/service";
+import Accordion from 'react-bootstrap/Accordion';
 
 function CreateAgency(props) {
-  const [logo, setLogo] = useState(null);
-  const storedToken = localStorage.getItem('authToken');
-  const [form, setForm] = useState({
-    name: "",
-    website: "",
-    description: "",
-    phonenumber: "",
-    email:""
-  });
-
-  const handleFileUpload = async (imageToUpload) => {
-    const uploadData = new FormData();
-    uploadData.append("logo", imageToUpload);
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/agency`,
-      uploadData
-    );
-    return response.data;
-  };
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    let logoUrl = "";
-    if (logo) {
-      logoUrl = await handleFileUpload(logo);
-    }
-    await axios.post(`${process.env.REACT_APP_API_URL}/api/agency`, {
-      ...form, 
-      logo: logoUrl, 
-    }, { headers: { Authorization: `Bearer ${storedToken}` } }
-    );
-    setForm({
+    const [logo, setLogo] = useState([]);
+    const storedToken = localStorage.getItem('authToken');
+    const [form, setForm] = useState({
       name: "",
       website: "",
       description: "",
       phonenumber: "",
       email:""
     });
-    setLogo(null);
-    // props.refreshAgency();
-  };
-
+  
+    const handleFileUpload = async (logoToUpload) => {
+      const uploadData = new FormData();
+      uploadData.append("logo", logoToUpload);
+      const response = await api.post(
+        `${process.env.REACT_APP_API_URL}/api/upload/logo`,
+        uploadData
+      );
+      return response.data;
+    };
+  
+    const handleFormSubmit = async (e) => {
+      e.preventDefault();
+     
+      try {
+        const logoUrl = await handleFileUpload(logo);
+        
+        await api.post("/api/agency", {
+          ...form, 
+          logo: logoUrl, 
+        });
+      
+        setForm({
+          name: "",
+          website: "",
+          description: "",
+          phonenumber: "",
+          email:""
+        });
+      
+        setLogo({logo:""});
+        props.refreshAgency();
+      } catch (error) {
+        console.error(error);
+      }
+    };
   return (
-    <div>
-      <h2>Create Agency</h2>
-      <Form onSubmit={handleFormSubmit}>
-        <Form.Group controlId="name">
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+<Accordion defaultActiveKey="0" >
+      <Accordion.Item eventKey="1">
+        <Accordion.Header>Create Agency</Accordion.Header>
+        <Accordion.Body>
+          <Form onSubmit={handleFormSubmit}>
+        <Form.Group className="form-group col-md-6">
           <Form.Label>Name:</Form.Label>
           <Form.Control
             type="text"
@@ -63,7 +69,7 @@ function CreateAgency(props) {
             }}
           />
         </Form.Group>
-        <Form.Group controlId="website">
+        <Form.Group className="form-group col-md-6">
           <Form.Label>Website:</Form.Label>
           <Form.Control
             type="url"
@@ -74,7 +80,7 @@ function CreateAgency(props) {
             }}
           />
         </Form.Group>
-        <Form.Group controlId="phonenumber">
+        <Form.Group className="form-group col-md-6">
           <Form.Label>Phone Number:</Form.Label>
           <Form.Control
             type="number"
@@ -85,7 +91,7 @@ function CreateAgency(props) {
             }}
           />
         </Form.Group>
-        <Form.Group controlId="email">
+        <Form.Group className="form-group col-md-6">
           <Form.Label>Email:</Form.Label>
           <Form.Control
             type="email"
@@ -96,10 +102,12 @@ function CreateAgency(props) {
             }}
           />
         </Form.Group>
-        <Form.Group controlId="logo">
+        <Form.Group className="form-group col-md-6">
           <Form.Label>Logo:</Form.Label>
           <Form.Control
             type="file"
+            className="form-control-file"
+            id="logo"
             name="logo"
             onChange={(e) => setLogo(e.target.files[0])}
           />
@@ -108,8 +116,12 @@ function CreateAgency(props) {
           Create the Agency
         </Button>
       </Form>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
     </div>
   );
 }
 
 export default CreateAgency;
+

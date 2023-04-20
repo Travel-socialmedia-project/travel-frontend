@@ -9,20 +9,19 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function Footer() {
   return (
-    <div style={{ position: "relative", bottom: 0, width: "100%" }}>
+    <div>
       <footer 
-      className="bg-dark text-center text-white" 
-      style={{
-        position: "fixed",
-        bottom: 0,
-        width: "100%",
-        height: "100px", 
-        marginTop: "50px"
-      }}
-    >
-      {/* Grid container */}
-      <div className="container p-4 pb-0 " >
-        {/* Section: Social media */}
+        className="bg-dark text-center text-white" 
+        style={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          height: "100px"
+        }}
+      >
+        {/* Grid container */}
+        <div className="container p-4 pb-0" >
+          {/* Section: Social media */}
         <section className="mb-4">
           {/* Facebook */}
           <a
@@ -100,14 +99,13 @@ David Correia
       </div>
       {/* Grid container */}
 
-      {/* Copyright */}
       <div
-        className="text-center p-3"
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
-      >
-      </div>
-      {/* Copyright */}
-    </footer>
+          className="text-center p-3"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+        >
+        </div>
+      </footer>
+      <div style={{ paddingBottom: "100px" }}></div>
     </div>
   );
 }

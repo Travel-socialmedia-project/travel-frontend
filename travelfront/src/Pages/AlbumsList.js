@@ -22,7 +22,7 @@ function AlbumList() {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingTop: "80px" }}>
 
     
 <AddAlbum  refreshAlbums={getAllAlbums} /> 
