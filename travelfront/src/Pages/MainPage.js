@@ -14,7 +14,7 @@ function MainPage() {
         alt='...'
       >
         <h5>Welcome to Travel Social</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>looking to share your unforgettable travel experiences with loved ones? Build a digital travel album to showcase your adventures and relive your favorite moments. </p>
       </MDBCarouselItem>
 
       <MDBCarouselItem
@@ -24,7 +24,7 @@ function MainPage() {
         alt='...'
       >
         <h5>Login and join your friends</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>By tagging that special in your collecion, give them acess to upload and download photos from that memorable travel </p>
       </MDBCarouselItem>
 
       <MDBCarouselItem
@@ -34,7 +34,7 @@ function MainPage() {
         alt='...'
       >
         <h5>Upload Photos</h5>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        <p> And don't forget to give credit to the travel agency that provided you with the best experience</p>
       </MDBCarouselItem>
     </MDBCarousel>
   );

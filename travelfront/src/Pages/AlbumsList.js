@@ -36,7 +36,7 @@ function AlbumList() {
             src={album.image}
             alt={album.title}
             className="custom-image-class"
-            style={{ width: "80%", height: "500px" }}
+            style={{ width: "100%", height: "500px" }}
           />
           <Card.Body>
             <Card.Title>{album.title}</Card.Title>
