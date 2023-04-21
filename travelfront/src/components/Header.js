@@ -23,14 +23,14 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
               {isLoggedIn && (
                 <>
                   <Nav.Link as={Link} to="/albums">
-                    Albums
+                    Photos
                   </Nav.Link>
                   <Nav.Link as={Link} to="/agency">
                     Agency
                   </Nav.Link>
                   <NavDropdown title={user && user.name} id="basic-nav-dropdown">
                     <NavDropdown.Item as={Link} to={`/my-albums`}>
-                      Profile
+                      My Photos
                     </NavDropdown.Item>
                     <NavDropdown.Item onClick={logOutUser}>
                       Logout

@@ -2,18 +2,36 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {Button} from 'react-bootstrap';
+import api from "../service/service";
 
 function UpdateAlbum() {
+  const [image, setImage] = useState("");
     const [form, setForm] = useState({
       title: "",
       description: "",
       country: "",
       city: "",
+
     });
-    const [image, setImage] = useState("");
     const { albumId } = useParams();
     const navigate = useNavigate();
     const storedToken = localStorage.getItem('authToken');
+
+
+    const handleFileUpload = async (imageToUpload) => {
+      const uploadData = new FormData();
+  
+      uploadData.append("image", imageToUpload);
+  
+      const response = await api.post(
+        `${process.env.REACT_APP_API_URL}/api/upload`,
+        uploadData
+      );
+  
+      return response.data;
+    };
+
+
   useEffect(() => {
    axios
      .get(`${process.env.REACT_APP_API_URL}/api/albums/${albumId}`,{ headers: { Authorization: `Bearer ${storedToken}`} })
@@ -21,11 +39,12 @@ function UpdateAlbum() {
        const oneAlbum = response.data;
        setForm({
          title: oneAlbum.title,
-         image: oneAlbum.image,
+         
          description: oneAlbum.description,
          country: oneAlbum.country,
          city: oneAlbum.city,
        });
+       setImage({image:oneAlbum.image})
      })
      .catch((error) => console.log("error getting this Album", error));
  }, [albumId]);///add [albumId]
@@ -40,46 +59,45 @@ function UpdateAlbum() {
  };
 
  // Submit the form data to update the album
- const handleFormSubmit = (e) => {
-   e.preventDefault();
+ const handleFormSubmit = async (e) => {
+  e.preventDefault();
 
-   const requestBody = {
-     title: form.title,
-     image: form.image,
-     description: form.description,
-     country: form.country,
-     city: form.city,
-   };
+  try {
+    const imageUrl = await handleFileUpload(image);
+    const requestBody = {
+      image: imageUrl.imageUrl, 
+      title: form.title,
+      description: form.description,
+      country: form.country,
+      city: form.city,
+    };
 
-   axios
-     .put(`${process.env.REACT_APP_API_URL}/api/albums/${albumId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}`} })
-     .then((response) => {
-       navigate(`/albums/${albumId}`);
-     })
-     .catch((error) => console.log("error updating this Album", error));
- }
+    await api.put(`/api/albums/${albumId}`, requestBody);
+    navigate(`/albums/${albumId}`);
+  } catch (error) {
+    console.log("error updating this Album", error);
+  }
+};
 
 
-  return (
-    
-
-<div style={{paddingTop: "80px" , display: 'flex', justifyContent: 'center' }}>
-  <div>
-    <h2>Update Album</h2>
-    <form onSubmit={handleFormSubmit}>
-    <div className="form-row mb-3">
-  <div className="form-group col-md-12">
-    <label for="image">Image:</label>
-    <input
-                type="file"
-                className="form-control-file"
-                id="image"
-                name="image"
-                onChange={(e) => setImage(e.target.files[0])}
-              />
-    <div class="form-group col-md-12 mb-3">
-      <label for="title">Title:</label>
-      <input
+return (
+  <div style={{paddingTop: "80px" , display: 'flex', justifyContent: 'center' }}>
+    <div>
+      <h2>Update Album</h2>
+      <form onSubmit={handleFormSubmit}>
+        <div className="form-row mb-3">
+          <div className="form-group col-md-12">
+            <label htmlFor="image">Image:</label>
+            <input
+              type="file"
+              className="form-control-file"
+              id="image"
+              name="image"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+            <div className="form-group col-md-12 mb-3">
+              <label htmlFor="title">Title:</label>
+              <input
                 type="text"
                 className="form-control"
                 id="title"
@@ -87,70 +105,64 @@ function UpdateAlbum() {
                 value={form.title}
                 onChange={handleFormChange}
               />
+            </div>
+          </div>
+        </div>
+        <div className="form-group col-md-12 mb-3">
+          <label htmlFor="description">Description</label>
+          <input
+            type="text"
+            className="form-control"
+            id="description"
+            name="description"
+            value={form.description}
+            onChange={handleFormChange}
+          />
+        </div>
+        <div className="form-row">
+          <div className="form-group col-md-12 mb-3">
+            <label htmlFor="city">City</label>
+            <input
+              type="text"
+              className="form-control"
+              id="city"
+              name="city"
+              value={form.city}
+              onChange={handleFormChange}
+            />
+          </div>
+          <div className="form-group col-md-12 mb-3">
+            <label htmlFor="country">Country:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="country"
+              name="country"
+              value={form.country}
+              onChange={handleFormChange}
+            />
+          </div>
+          <div className="form-group col-md-12 mb-3">
+            <label htmlFor="agency">Agency</label>
+            <input
+              type="text"
+              className="form-control"
+              id="agency"
+              name="agency"
+              value={form.agency}
+              onChange={handleFormChange}
+            />
+          </div>
+        </div>
+        <div>
+          <Button variant="primary" type="submit">
+            Update my Album
+          </Button>
+        </div>
+      </form>
     </div>
-    
   </div>
-  
-  </div>
-  <div class="form-group col-md-12 mb-3">
-    <label for="description">Description</label>
-    <input
-                type="text"
-                className="form-control"
-                id="description"
-                name="description"
-                value={form.description}
-                onChange={handleFormChange}
-              />
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-12 mb-3">
-      <label for="city">City</label>
-      <input
-                type="text"
-                className="form-control"
-                id="city"
-                name="city"
-                value={form.city}
-                onChange={handleFormChange}
-              />
-    </div>
-    <div class="form-group col-md-12 mb-3">
-      <label for="country">Country:</label>
-      <input
-                type="text"
-                className="form-control"
-                id="country"
-                name="country"
-                value={form.country}
-                onChange={handleFormChange}
-              />
-    </div>
-    <div class="form-group col-md-12 mb-3">
-      <label for="agency">Agency</label>
-      <input
-                type="text"
-                className="form-control"
-                id="agency"
-                name="agency"
-                value={form.agency}
-                onChange={handleFormChange}
-              />
-    </div>
-    </div>
-    <div>
-    <Button variant="primary" type="submit">
-              Update my Album
-            </Button>
-    </div>
-            
-</form>
-</div>
-</div>
-
-
-     );
-
+);
 
 }
 export default UpdateAlbum;

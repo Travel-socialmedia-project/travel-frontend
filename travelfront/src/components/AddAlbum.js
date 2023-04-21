@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 import api from "../service/service";
 // import service from "../service/service";
 import { Accordion, Button } from "react-bootstrap";
